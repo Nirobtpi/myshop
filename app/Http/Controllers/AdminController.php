@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPasswordMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 class AdminController extends Controller
 {
     function login_page(){
@@ -49,6 +53,51 @@ class AdminController extends Controller
 
     public function admin_dashboard(){
         return view('backend.admin_dashboard');
+    }
+
+    // reset password page 
+    public function password_reset_page(){
+        return view('backend.admin_profile.resetpassword-page');
+    }
+
+    // email send with link 
+    public function reset_pass_link(Request $request){
+       
+       $user=User::where('email',"=",$request->email)->first();
+        if(!empty($user)){
+            $user->remember_token=Str::random(40);
+            $user->save();
+
+            Mail::to($user->email)->send(new ForgotPasswordMail($user));
+
+             return back()->with('user_succ','Please check your email and reset your password!');
+            
+            
+        }else{
+            return back()->with('user_err','Your Email Does Not Match!');
+        }
+    }
+
+    public function reset_page($token){
+       $userData=User::where('remember_token',$token)->first();
+       if($userData){
+       
+         return view('backend.admin_profile.password-change',compact('userData'));
+       }else{
+        abort(404);
+       }
+       
+    }
+
+    public function admin_password_reset(Request $request,$id){
+       $user=User::findOrFail($id);
+       $request->validate([
+        'password'=>['required','min:8','confirmed']
+       ]);
+       $user->update([
+        'password'=>Hash::make($request->password),
+       ]);
+       return redirect()->route('admin.login')->with('pass','Your Password Recover Successfully');
     }
     
     
