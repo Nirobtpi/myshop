@@ -90,13 +90,17 @@ class AdminController extends Controller
     }
 
     public function admin_password_reset(Request $request,$id){
+        $rand= Str::random(40);
        $user=User::findOrFail($id);
        $request->validate([
         'password'=>['required','min:8','confirmed']
        ]);
-       $user->update([
-        'password'=>Hash::make($request->password),
-       ]);
+       if(empty($user->email_verified_at)){
+        $user->email_verified_at=date('Y-m-d H:i:s');
+       }
+       $user->password=Hash::make($request->password);
+       $user->remember_token=$rand;
+       $user->save();
        return redirect()->route('admin.login')->with('pass','Your Password Recover Successfully');
     }
     
