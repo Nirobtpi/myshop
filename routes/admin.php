@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,8 +20,16 @@ Route::get('reset/{token}',[AdminController::class,'reset_page'])->name('admin.r
 Route::post('admin/password/reset/{id}',[AdminController::class,'admin_password_reset'])->name('admin.password.reset');
 
 Route::middleware('isadmin')->prefix('admin')->group(function(){
+
   Route::get('dashboard',[AdminController::class,'admin_dashboard'])->name('admin.dashboard');
   Route::get('logout',[AdminController::class,'logout'])->name('admin.logout');
+
+  // category route 
+  Route::prefix('category')->group(function(){
+    Route::get('index',[CategoryController::class,'index'])->name('category.index');
+  });
+
+
 });
 
 Route::get('/', function () {
