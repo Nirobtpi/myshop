@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::post('checkdel',[CategoryController::class,'checkdel'])->name('category.check.del');
     Route::get('edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
     Route::post('update',[CategoryController::class,'update'])->name('category.update');
+  });
+
+  Route::prefix('subcategory')->group(function(){
+     Route::get('index',[SubCategoryController::class,'index'])->name('subcategory.index');
   });
 
 

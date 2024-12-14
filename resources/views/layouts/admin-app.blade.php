@@ -242,7 +242,7 @@
                                         <p>Category</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="./layout/fixed-sidebar.html" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('subcategory.index') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Sub Category</p>
                                     </a>
