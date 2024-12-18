@@ -38,6 +38,8 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
 
   Route::prefix('subcategory')->group(function(){
      Route::get('index',[SubCategoryController::class,'index'])->name('subcategory.index');
+     Route::get('add/subcategory',[SubCategoryController::class,'addsubcategory'])->name('subcategory.add');
+     
   });
 
 

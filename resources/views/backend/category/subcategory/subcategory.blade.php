@@ -12,7 +12,7 @@
                             <h3 class="card-title">Bordered Table</h3>
                         </div>
                         <div class="col-lg-6 d-flex justify-content-end">
-                            <a class="btn btn-sm btn-primary" href="">Add sub_category</a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('subcategory.add') }}">Add sub_category</a>
                         </div>
                     </div>
                 </div> <!-- /.card-header -->
@@ -43,9 +43,9 @@
                                                     id="exampleCheck1">
                                             </div>
                                         </td>
-                                        <td>{{ $subsub_categories->firstitem() + $key }}</td>
-                                        <td>{{ $sub_cat->sub_category_name }}</td>
-                                        <td>{{ $sub_cat->sub_category_slug }}</td>
+                                        <td>{{ $subcategories->firstitem() + $key }}</td>
+                                        <td>{{ $sub_cat->name }}</td>
+                                        <td>{{ $sub_cat->slug }}</td>
                                         <td>
                                             <a href="#" class="btn btn-sm btn-success edit"
                                                 data-id='{{ $sub_cat->id }}' data-bs-toggle="modal"
@@ -72,39 +72,36 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit sub_category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="" method="POST">
-                    <div class="modal-body">
-
-                        @csrf
-                        <div class="card-body">
-                            <div class="mb-3"> <label for="sub_category" class="form-label">sub_category Name</label>
-                                <input type="text" class="form-control" id="sub_category" name="sub_category"
-                                    placeholder="sub_category Name">
-                                @error('sub_category')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <input type="hidden" name="sub_cat_id" id="sub_cat_id">
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary update-btn">Update sub_category</button>
-                </form>
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit sub_category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="" method="POST">
+                <div class="modal-body">
+
+                    @csrf
+                    <div class="card-body">
+                        <div class="mb-3"> <label for="sub_category" class="form-label">sub_category Name</label>
+                            <input type="text" class="form-control" id="sub_category" name="sub_category"
+                                placeholder="sub_category Name">
+                            @error('sub_category')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="sub_cat_id" id="sub_cat_id">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary update-btn">Update sub_category</button>
+            </form>
         </div>
     </div>
-    </div>
-
-
+</div>
 @endsection
 
 @push('js')
