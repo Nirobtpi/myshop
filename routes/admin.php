@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChildController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -34,14 +35,21 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::post('checkdel',[CategoryController::class,'checkdel'])->name('category.check.del');
     Route::get('edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
     Route::post('update',[CategoryController::class,'update'])->name('category.update');
+    Route::get('all/category',[CategoryController::class,'allCategory'])->name('category.all');
   });
 
   Route::prefix('subcategory')->group(function(){
-     Route::get('index',[SubCategoryController::class,'index'])->name('subcategory.index');
-     Route::get('add/subcategory',[SubCategoryController::class,'addsubcategory'])->name('subcategory.add');
-     Route::post('store',[SubCategoryController::class,'store'])->name('subcategory.store');
-     Route::get('/delete/{id}',[SubCategoryController::class,'delete'])->name('subcategory.delete');
+    Route::get('index',[SubCategoryController::class,'index'])->name('subcategory.index');
+    Route::get('add/subcategory',[SubCategoryController::class,'addsubcategory'])->name('subcategory.add');
+    Route::post('store',[SubCategoryController::class,'store'])->name('subcategory.store');
+    Route::get('/delete/{id}',[SubCategoryController::class,'delete'])->name('subcategory.delete');
+    Route::post('check/delete',[SubCategoryController::class,'checkDelete'])->name('subcategory.check.delete');
+    Route::get('edit/{id}',[SubCategoryController::class,'editData'])->name('subcategory.edit');
+    Route::post('update',[SubCategoryController::class,'update'])->name('subcategory.update');
      
+  });
+  Route::prefix('childcategory')->group(function(){
+    Route::get('index',[ChildController::class,'index'])->name('childcategory.index');
   });
 
 

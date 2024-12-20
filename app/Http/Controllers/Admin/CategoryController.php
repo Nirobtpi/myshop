@@ -41,7 +41,7 @@ class CategoryController extends Controller
        foreach($allCheckItem as $delId){
             Category::findOrFail($delId)->delete(); 
        }
-       return back()->with('delete','Your file has been deleted.');
+       return back()->with('delete','Your Category has been deleted.');
     }
 
     // edit methode 
@@ -64,5 +64,13 @@ class CategoryController extends Controller
             'category_slug'=>$slug,
         ]);
         return back()->with('success','Category Update Successfully');
+    }
+
+    // fetch all category 
+
+    public function allCategory(){
+        $allCategory=Category::get();
+
+        return response()->json(['data'=>$allCategory]);
     }
 }
