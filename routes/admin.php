@@ -46,10 +46,19 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::post('check/delete',[SubCategoryController::class,'checkDelete'])->name('subcategory.check.delete');
     Route::get('edit/{id}',[SubCategoryController::class,'editData'])->name('subcategory.edit');
     Route::post('update',[SubCategoryController::class,'update'])->name('subcategory.update');
+    Route::get('subcategory-list/{id}',[SubCategoryController::class,'allSubCategory'])->name('subcategory.all');
+    Route::get('all/subcategory',[SubCategoryController::class,'getallSubCategory'])->name('subcategory.get.all');
      
   });
   Route::prefix('childcategory')->group(function(){
     Route::get('index',[ChildController::class,'index'])->name('childcategory.index');
+    // get subcategory url with ajax 
+    Route::get('subcategory-list/{id}',[SubCategoryController::class,'allSubCategory'])->name('subcategory.all');
+    // store child category 
+    Route::post('store',[ChildController::class,'store'])->name('childcategory.store');
+    // Route::get('allcategory',[CategoryController::class,'allCategory']);
+    Route::get('all/category',[CategoryController::class,'allCategory'])->name('category.all');
+    Route::get('edit/{id}',[ChildController::class,'edit'])->name('childcategory.edit');
   });
 
 

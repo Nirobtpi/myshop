@@ -61,4 +61,14 @@ class SubCategoryController extends Controller
         ]);
         return back()->with('success','Sub Category Update Successfully');
     }
+    public function allSubCategory($id){
+        $subcat=SubCategory::where('category_id',$id)->get();
+        
+        return response()->json(['data'=>$subcat]);
+    }
+    public function getallSubCategory(){
+        $subcat=SubCategory::get();
+        
+        return response()->json(['data'=>$subcat]);
+    }
 }
