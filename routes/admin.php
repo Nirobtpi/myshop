@@ -47,7 +47,7 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::get('edit/{id}',[SubCategoryController::class,'editData'])->name('subcategory.edit');
     Route::post('update',[SubCategoryController::class,'update'])->name('subcategory.update');
     Route::get('subcategory-list/{id}',[SubCategoryController::class,'allSubCategory'])->name('subcategory.all');
-    Route::get('all/subcategory',[SubCategoryController::class,'getallSubCategory'])->name('subcategory.get.all');
+    
      
   });
   Route::prefix('childcategory')->group(function(){
@@ -59,6 +59,8 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     // Route::get('allcategory',[CategoryController::class,'allCategory']);
     Route::get('all/category',[CategoryController::class,'allCategory'])->name('category.all');
     Route::get('edit/{id}',[ChildController::class,'edit'])->name('childcategory.edit');
+    Route::get('all/subcategory',[SubCategoryController::class,'getallSubCategory'])->name('subcategory.get.all');
+    Route::post('update',[ChildController::class,'update'])->name('childcategory.update');
   });
 
 

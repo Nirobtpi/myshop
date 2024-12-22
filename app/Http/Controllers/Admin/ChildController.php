@@ -57,4 +57,24 @@ class ChildController extends Controller
         $cat=Childcategory::findOrFail($id);
         return response()->json(['data'=>$cat]);
     }
+
+    public function update(Request $request){
+       
+        $id=$request->id;
+         $request->validate([
+            'category_name'=>['required'],
+            'edit_sub_category_name'=>['required'],
+            'edit_child_category_name'=>['required'],
+        ]);
+        $slug=strtolower(str_replace(' ','-',$request->child_category_name));
+
+        Childcategory::findOrFail($id)->update([
+            'category_id'=>$request->category_name,
+            'subcategory_id'=>$request->edit_sub_category_name,
+            'name'=>$request->edit_child_category_name,
+            'slug'=>$slug,
+        ]);
+        return response()->json(['data'=>'Category Updated Successfully!']);
+
+    }
 }

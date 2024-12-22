@@ -124,7 +124,7 @@
                         <div class="card-header">
                             <div class="card-title">Add Child Category</div>
                         </div>
-                        <form class="needs-validation" id="childcat">
+                        <form class="needs-validation" id="editchildcat">
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-12">
@@ -135,19 +135,22 @@
                                         </select>
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="sub_category_name" class="form-label">Sub Category</label>
-                                        <select class="form-select" id="edit_sub_category_name" name="sub_category_name">
+                                        <label for="edit_sub_category_name" class="form-label">Sub Category</label>
+                                        <select class="form-select" id="edit_sub_category_name"
+                                            name="edit_sub_category_name">
 
                                         </select>
                                     </div>
+                                    <input type="hidden" name="id" id="editId">
                                     <div class="col-md-12">
-                                        <label for="child_category_name" class="form-label">Child Category Name</label>
+                                        <label for="edit_child_category_name" class="form-label">Child Category
+                                            Name</label>
                                         <input type="text" class="form-control" id="edit_child_category_name"
-                                            name="child_category_name">
+                                            name="edit_child_category_name">
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer"> <button class="btn btn-info" type="submit">Add Child
+                            <div class="card-footer"> <button class="btn btn-info update" type="submit">Edit Child
                                     Category</button>
                             </div>
                         </form>
@@ -229,7 +232,7 @@
                             const isSelected = cat.id === id ? 'selected' :
                                 '';
                             select.append(
-                                `'<option value='${cat.id}' ${isSelected}>${cat.category_name}</option>'`
+                                `<option value='${cat.id}' ${isSelected}>${cat.category_name}</option>`
                             );
                         });
                     },
@@ -247,7 +250,9 @@
                     success: function(response) {
                         // console.log(response.data.category_id);
                         $('#edit_child_category_name').val(response.data.name)
+                        $('#editId').val(response.data.id)
                         allcategory(response.data.category_id);
+                        allsubcategory(response.data.subcategory_id)
                         //    console.log(a)
                     },
                     error: function(xhr) {
@@ -261,23 +266,74 @@
                     type: 'GET',
                     url: `{{ route('subcategory.get.all') }}`,
                     success: function(response) {
-                        console.log(response.data);
-                        // const select = $('#edit_category_name');
-                        // select.empty();
-                        // select.append('<option>choose Category</option>');
-                        // response.data.forEach(cat => {
-                        //     const isSelected = cat.category_id === id ? 'selected' :
-                        //         '';
-                        //     select.append(
-                        //         `'<option value='${cat.id}' ${isSelected}>${cat.category_name}</option>'`
-                        //     );
-                        // });
+
+                        const editselect = $('#edit_sub_category_name');
+                        editselect.empty();
+                        editselect.append('<option>choose Category</option>');
+                        // editselect.prop('disabled', true);
+                        response.data.forEach(subcat => {
+                            const isSelected = subcat.id === id ? 'selected' :
+                                '';
+                            editselect.append(
+                                `'<option value='${subcat.id}' ${isSelected} >${subcat.name}</option>'`
+                            );
+                        });
                     },
                     error: function(xhr) {
-
+                        console.log(xhr);
                     }
                 });
             }
+
+            $('#edit_category_name').on('change', function() {
+                let id = $(this).val();
+                $.ajax({
+                    url: `subcategory-list/${id}`,
+                    type: "GET",
+                    success: function(response) {
+                        const select = $('#edit_sub_category_name');
+                        select.empty();
+                        select.append('<option>Choose Sub Category');
+                        console.log(response.data);
+                        // $('#edit_sub_category_name').prop('disabled', false);
+                        response.data.forEach(subcategory => {
+                            select.append(
+                                `<option value="${subcategory.id}">${subcategory.name}</option>`
+                            )
+                        });
+                    },
+                    error: function(xhr) {
+                        console.log(xhr)
+                    }
+                });
+            });
+            
+            $('#editchildcat').on('submit', function() {
+                event.preventDefault();
+                let formdata = $(this).serialize();
+                // $('#edit_sub_category_name').prop('disabled', false);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('childcategory.update') }}",
+                    data: formdata,
+                    
+                    success: function(response) {
+
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `${response.data}`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error("Error occurred:", xhr.responseText);
+                    }
+                });
+            });
+
+
             allcategory()
             allsubcategory()
         });
