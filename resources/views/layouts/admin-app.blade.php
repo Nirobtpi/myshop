@@ -253,7 +253,7 @@
                                         <p>Child Category</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="./layout/sidebar-mini.html" class="nav-link"> <i
+                                <li class="nav-item"> <a href="" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Brand</p>
                                     </a>
