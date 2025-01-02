@@ -253,12 +253,11 @@
                                         <p>Child Category</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('brand.index') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Brand</p>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
 

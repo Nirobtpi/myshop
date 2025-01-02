@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -62,7 +63,11 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::get('all/subcategory',[SubCategoryController::class,'getallSubCategory'])->name('subcategory.get.all');
     Route::post('update',[ChildController::class,'update'])->name('childcategory.update');
   });
-
+  
+  Route::prefix('brand')->group(function(){
+     Route::get('index',[BrandController::class,'index'])->name('brand.index');
+     Route::get('add',[BrandController::class,'add'])->name('brand.add');
+  });
 
 });
 
