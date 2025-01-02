@@ -46,7 +46,7 @@
                                         <td>{{ $brands->firstitem() + $key }}</td>
                                         <td>{{ $brand->brand_name }}</td>
                                         <td>{{ $brand->brand_slug }}</td>
-                                        <td>{{ $brand->brand_slug }}</td>
+                                        <td><img width="100px" src="{{ asset('uploads/brands') }}/{{ $brand->brand_logo }}" alt=""></td>
                                         <td>
                                             <a href="#" class="btn btn-sm btn-success edit"
                                                 data-id='{{ $brand->id }}' data-bs-toggle="modal"
@@ -73,3 +73,17 @@
     </div>
 
 @endsection
+
+@push('js')
+    @if (session('store'))
+        <script>
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "{{ session('store') }}",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        </script>
+    @endif
+@endpush

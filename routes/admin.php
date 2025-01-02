@@ -67,6 +67,7 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
   Route::prefix('brand')->group(function(){
      Route::get('index',[BrandController::class,'index'])->name('brand.index');
      Route::get('add',[BrandController::class,'add'])->name('brand.add');
+     Route::post('store',[BrandController::class,'store'])->name('brand.store');
   });
 
 });
