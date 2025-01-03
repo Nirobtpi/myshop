@@ -25,6 +25,8 @@ Route::post('admin/password/reset/{id}',[AdminController::class,'admin_password_
 Route::middleware('isadmin')->prefix('admin')->group(function(){
 
   Route::get('dashboard',[AdminController::class,'admin_dashboard'])->name('admin.dashboard');
+  Route::get('chnage-password',[AdminController::class,'changePasswword'])->name('admin.changepassword');
+  Route::post('chnage-password/{id}',[AdminController::class,'change_passwword'])->name('admin.change.password');
   Route::get('logout',[AdminController::class,'logout'])->name('admin.logout');
 
   // category route 

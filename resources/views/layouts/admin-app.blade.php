@@ -279,10 +279,16 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{ route('admin.changepassword') }}" class="nav-link"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Change Password</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Logout</p>
-                                    </a> </li>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-header">LABELS</li>

@@ -89,6 +89,7 @@ class AdminController extends Controller
        
     }
 
+    // forgot password reset 
     public function admin_password_reset(Request $request,$id){
         $rand= Str::random(40);
        $user=User::findOrFail($id);
@@ -103,6 +104,29 @@ class AdminController extends Controller
        $user->save();
        return redirect()->route('admin.login')->with('pass','Your Password Recover Successfully');
     }
+
+    // change password 
+    public function changePasswword(){
+        return view('backend.admin_profile.changepassword');
+    }
+
+    public function change_passwword(Request $request,$id){
+        // return $request->new_password;
+        $request->validate([
+            'current_password'=>['required'],
+            'password'=>['required','min:8','confirmed'],
+        ]);
+        $user=User::findOrFail($id);
+        if(Hash::check($request->current_password,$user->password)){
+            $user->update([
+                'password'=>Hash::make($request->password),
+            ]);
+            return back()->with('succ','Password Update Successfully');
+        }else{
+            return back()->with('err','Current Password Does Not Match');
+        }
+    }
     
+
     
 }
