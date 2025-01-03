@@ -68,6 +68,10 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
      Route::get('index',[BrandController::class,'index'])->name('brand.index');
      Route::get('add',[BrandController::class,'add'])->name('brand.add');
      Route::post('store',[BrandController::class,'store'])->name('brand.store');
+     Route::get('delete/{id}',[BrandController::class,'distroy'])->name('brand.distroy');
+     Route::post('check-delete',[BrandController::class,'checkDelete'])->name('brand.checkDelete');
+     Route::get('edit/{id}',[BrandController::class,'edit'])->name('brand.edit');
+     Route::post('update/{id}',[BrandController::class,'update'])->name('brand.update');
   });
 
 });

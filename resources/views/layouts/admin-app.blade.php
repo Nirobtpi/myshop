@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css"
         integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    
+
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
     @stack('css')
@@ -113,8 +113,8 @@
                                 <!--begin::Message-->
                                 <div class="d-flex">
                                     <div class="flex-shrink-0"> <img
-                                            src="{{ asset('backend') }}/assets/img/user3-128x128.jpg" alt="User Avatar"
-                                            class="img-size-50 rounded-circle me-3"> </div>
+                                            src="{{ asset('backend') }}/assets/img/user3-128x128.jpg"
+                                            alt="User Avatar" class="img-size-50 rounded-circle me-3"> </div>
                                     <div class="flex-grow-1">
                                         <h3 class="dropdown-item-title">
                                             Nora Silvester
@@ -129,14 +129,16 @@
                                 </div>
                                 <!--end::Message-->
                             </a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item dropdown-footer">See
+                            <div class="dropdown-divider"></div> <a href="#"
+                                class="dropdown-item dropdown-footer">See
                                 All Messages</a>
                         </div>
                     </li>
                     <!--end::Messages Dropdown Menu-->
                     <!--begin::Notifications Dropdown Menu-->
                     <li class="nav-item dropdown"> <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i
-                                class="bi bi-bell-fill"></i> <span class="navbar-badge badge text-bg-warning">15</span>
+                                class="bi bi-bell-fill"></i> <span
+                                class="navbar-badge badge text-bg-warning">15</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <span
                                 class="dropdown-item dropdown-header">15 Notifications</span>
@@ -149,7 +151,8 @@
                             <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"> <i
                                     class="bi bi-file-earmark-fill me-2"></i> 3 new reports
                                 <span class="float-end text-secondary fs-7">2 days</span> </a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item dropdown-footer">
+                            <div class="dropdown-divider"></div> <a href="#"
+                                class="dropdown-item dropdown-footer">
                                 See All Notifications
                             </a>
                         </div>
@@ -211,7 +214,7 @@
                     <!--begin::Brand Image--> <img src="{{ asset('backend') }}/assets/img/AdminLTELogo.png"
                         alt="AdminLTE Logo" class="brand-image opacity-75 shadow">
                     <!--end::Brand Image-->
-                    <!--begin::Brand Text--> <span class="brand-text fw-light">AdminLTE 4</span>
+                    <!--begin::Brand Text--> <span class="brand-text fw-light">My Shope</span>
                     <!--end::Brand Text-->
                 </a>
                 <!--end::Brand Link-->
@@ -223,7 +226,8 @@
                     <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item"> <a href="{{ route('admin.dashboard') }}" class="nav-link active"> <i
+                        <li class="nav-item"> <a href="{{ route('admin.dashboard') }}"
+                                class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"> <i
                                     class="nav-icon bi bi-speedometer"></i>
                                 <p>
                                     Dashboard
@@ -238,22 +242,26 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="{{ route('category.index') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('category.index') }}"
+                                        class="nav-link {{ Route::is('category.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Category</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('subcategory.index') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('subcategory.index') }}"
+                                        class="nav-link {{ Route::is('subcategory.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Sub Category</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('childcategory.index') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('childcategory.index') }}"
+                                        class="nav-link {{ Route::is('childcategory.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Child Category</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('brand.index') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('brand.index') }}"
+                                        class="nav-link {{ Route::is('brand.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Brand</p>
                                     </a>
@@ -263,7 +271,8 @@
 
 
                         <li class="nav-header">PROFILE</li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle-fill"></i>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-circle-fill"></i>
                                 <p>
                                     Profile Info
                                     <i class="nav-arrow bi bi-chevron-right"></i>
@@ -334,8 +343,8 @@
             <div class="float-end d-none d-sm-inline">Anything you want</div>
             <!--end::To the end-->
             <!--begin::Copyright--> <strong>
-                Copyright &copy; 2014-2024&nbsp;
-                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+                Copyright &copy; 2014-{{ date('Y') }}&nbsp;
+                <a href="" class="text-decoration-none">My Shop</a>.
             </strong>
             All rights reserved.
             <!--end::Copyright-->
@@ -345,7 +354,8 @@
     <!--end::App Wrapper-->
     <!--begin::Script-->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js">
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -361,7 +371,7 @@
             scrollbarAutoHide: "leave",
             scrollbarClickScroll: true,
         };
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
             if (
                 sidebarWrapper &&
@@ -376,7 +386,6 @@
                 });
             }
         });
-
     </script>
     <!--end::OverlayScrollbars Configure-->
     <!-- OPTIONAL SCRIPTS -->
@@ -400,7 +409,6 @@
         cardHeaders.forEach((cardHeader) => {
             cardHeader.style.cursor = "move";
         });
-
     </script> <!-- apexcharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
         integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
@@ -461,7 +469,6 @@
             sales_chart_options,
         );
         sales_chart.render();
-
     </script> <!-- jsvectormap -->
     <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
         integrity="sha256-/t1nN2956BT869E6H4V1dnt0X5pAQHPytli+1nTZm2Y=" crossorigin="anonymous"></script>
@@ -576,7 +583,6 @@
             option_sparkline3,
         );
         sparkline3.render();
-
     </script>
     <!--end::Script-->
 </body>

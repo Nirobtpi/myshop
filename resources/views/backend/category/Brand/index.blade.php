@@ -17,7 +17,7 @@
                     </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="" method="POST" id='submitform'>
+                    <form action="{{ route('brand.checkDelete') }}" method="POST" id='submitform'>
                         @csrf
                         <table class="table table-bordered">
                             <thead>
@@ -46,13 +46,13 @@
                                         <td>{{ $brands->firstitem() + $key }}</td>
                                         <td>{{ $brand->brand_name }}</td>
                                         <td>{{ $brand->brand_slug }}</td>
-                                        <td><img width="100px" src="{{ asset('uploads/brands') }}/{{ $brand->brand_logo }}" alt=""></td>
+                                        <td><img width="100px" src="{{ asset('uploads/brands') }}/{{ $brand->brand_logo }}"
+                                                alt=""></td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-success edit"
-                                                data-id='{{ $brand->id }}' data-bs-toggle="modal"
-                                                data-bs-target="#editModal"><i class="fa-regular fa-pen-to-square"></i>
+                                            <a href="{{ route('brand.edit',$brand->id) }}" class="btn btn-sm btn-success edit"><i class="fa-regular fa-pen-to-square"></i>
                                             </a>
-                                            <a data-link="" class="btn btn-sm btn-danger delete"><i
+                                            <a data-link="{{ route('brand.distroy', $brand->id) }}"
+                                                class="btn btn-sm btn-danger delete"><i
                                                     class="fa-solid fa-trash-can"></i></a>
                                         </td>
                                     </tr>
@@ -78,12 +78,87 @@
     @if (session('store'))
         <script>
             Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "{{ session('store') }}",
-            showConfirmButton: false,
-            timer: 1500
-        });
+                position: "top-end",
+                icon: "success",
+                title: "{{ session('store') }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
+    @if (session('update'))
+        <script>
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "{{ session('update') }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
+
+    <script>
+        $(document).ready(function(){
+
+            $(".checkall").click(function() {
+                $('input:checkbox').not(this).prop('checked', this.checked);
+                $('.del-btn').toggleClass('d-none', !$('input:checkbox:checked').length);
+            });
+
+            $('.check').click(function() {
+                $(".checkall").prop('checked', $('.check').length === $('.check:checked').length);
+                $('.del-btn').toggleClass('d-none', !$('.check:checked').length);
+            });
+
+            $('.delete').on('click', function() {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        let link = $(this).attr('data-link');
+                        // console.log(link);
+                        
+                        window.location.href=link;
+                    }
+                    });
+            })
+
+        
+            $('.del-btn').on('click',function(){
+                event.preventDefault();
+                Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#submitform').submit();
+                    }
+                })
+
+            })
+
+        })
+    </script>
+
+    @if (session('delete'))
+        <script>
+            Swal.fire({
+                title: "Deleted!",
+                text: "{{ session('delete') }}",
+                icon: "success"
+            });
         </script>
     @endif
 @endpush
