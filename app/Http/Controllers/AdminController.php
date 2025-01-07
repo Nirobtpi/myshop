@@ -70,7 +70,7 @@ class AdminController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
-             return back()->with('user_succ','Please check your email and reset your password!');
+            return back()->with('user_succ','Please check your email and reset your password!');
             
             
         }else{
@@ -91,7 +91,7 @@ class AdminController extends Controller
 
     // forgot password reset 
     public function admin_password_reset(Request $request,$id){
-        $rand= Str::random(40);
+       $rand= Str::random(40);
        $user=User::findOrFail($id);
        $request->validate([
         'password'=>['required','min:8','confirmed']

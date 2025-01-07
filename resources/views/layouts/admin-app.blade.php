@@ -291,6 +291,37 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-header">Settings</li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-circle-fill"></i>
+                                <p>
+                                    Settings
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{ route('admin.changepassword') }}" class="nav-link"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>SEO Settings</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Websit Settings</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Page Manage</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Smtp</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-header">LABELS</li>
                         <li class="nav-item"> <a href="#" class="nav-link"> <i
                                     class="nav-icon bi bi-circle text-danger"></i>
