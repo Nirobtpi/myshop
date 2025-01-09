@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
@@ -74,6 +75,14 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
      Route::post('check-delete',[BrandController::class,'checkDelete'])->name('brand.checkDelete');
      Route::get('edit/{id}',[BrandController::class,'edit'])->name('brand.edit');
      Route::post('update/{id}',[BrandController::class,'update'])->name('brand.update');
+  });
+
+  Route::prefix('setting')->group(function(){
+    Route::prefix('seo')->group(function(){
+      Route::get('/',[SettingController::class,'seoSetting'])->name('seo.setting');
+      Route::get('/update/{id}',[SettingController::class,'seoUpdate'])->name('seo.update');
+    });
+   
   });
 
 });
