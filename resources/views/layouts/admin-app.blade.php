@@ -310,14 +310,14 @@
                                         <p>Websit Settings</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('page.index') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
-                                        <p>Page Manage</p>
+                                        <p>Page Create</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('smtp.setting') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
-                                        <p>Smtp</p>
+                                        <p>Smtp Setting</p>
                                     </a>
                                 </li>
                             </ul>

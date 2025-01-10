@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AdminController;
@@ -80,7 +81,15 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
   Route::prefix('setting')->group(function(){
     Route::prefix('seo')->group(function(){
       Route::get('/',[SettingController::class,'seoSetting'])->name('seo.setting');
-      Route::get('/update/{id}',[SettingController::class,'seoUpdate'])->name('seo.update');
+      Route::post('/update/{id}',[SettingController::class,'seoUpdate'])->name('seo.update');
+    });
+    Route::prefix('smtp')->group(function(){
+      Route::get('/',[SettingController::class,'smtpSetting'])->name('smtp.setting');
+      Route::post('/update/{id}',[SettingController::class,'smtpUpdate'])->name('smtp.update');
+    });
+    Route::prefix('page')->group(function(){
+      Route::get('/',[PageController::class,'pageSetting'])->name('page.index');
+      Route::post('/update/{id}',[PageController::class,'pageUpdate'])->name('page.update');
     });
    
   });
