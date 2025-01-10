@@ -89,7 +89,9 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     });
     Route::prefix('page')->group(function(){
       Route::get('/',[PageController::class,'pageSetting'])->name('page.index');
-      Route::post('/update/{id}',[PageController::class,'pageUpdate'])->name('page.update');
+      Route::get('/add',[PageController::class,'addPage'])->name('page.add');
+      Route::get('edit',[PageController::class,'page_edit'])->name('page.edit');
+      Route::get('distroy',[PageController::class,'page_distroy'])->name('page.distroy');
     });
    
   });

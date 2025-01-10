@@ -11,7 +11,7 @@ class PageController extends Controller
     
         // page setting page 
     public function pageSetting(){
-        $pages=Page::all();
+        $pages=Page::paginate('1');
         
         return view('backend.setting.page.index',compact('pages'));
     }

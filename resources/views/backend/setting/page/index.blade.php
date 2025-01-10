@@ -6,17 +6,27 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.jqueryui.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.jqueryui.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <style>
+        .dt-paging {
+            display: none;
+        }
+    </style>
 @endpush
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card mb-4">
-                <div class="card-header">
-                    <h3 class="card-title">Bordered Table</h3>
+                <div class="card-header row">
+                     <div class="col-lg-6">
+                            <h3 class="card-title">Pages List</h3>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-end">
+                            <a class="btn btn-sm btn-primary" href="{{ route('page.add') }}">Add Page</a>
+                        </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="data" class="table table-bordered">
+                    <table id="data" class="table table-bordered mt-3">
                         <thead>
                             <tr>
                                 <th style="width: 10px">SL No</th>
@@ -26,19 +36,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="align-middle">
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                    </div>
-                                </td>
-                                <td><span class="badge text-bg-danger">55%</span></td>
-                            </tr>
-
-                        </tbody>
+                            @forelse ($pages as $key=>$page)
+                                <tr class="align-middle">
+                                    <td>{{ $pages->firstitem() + $key }}</td>
+                                    <td>{{ $page->page_name }}</td>
+                                    <td>{{ $page->page_title }}</td>
+                                    <td>
+                                        <a href="{{ route('page.edit', $page->id) }}" class="btn btn-sm btn-success edit"><i
+                                                class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                        <a data-link="{{ route('page.distroy', $page->id) }}"
+                                            class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="12" class="text-center">No Data Found</td>
+                                </tr>
+                            @endforelse
                     </table>
+                    {{ $pages->links('vendor.pagination.custom-pagination') }}
                 </div>
             </div>
         </div>
