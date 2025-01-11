@@ -18,12 +18,12 @@
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-header row">
-                     <div class="col-lg-6">
-                            <h3 class="card-title">Pages List</h3>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-end">
-                            <a class="btn btn-sm btn-primary" href="{{ route('page.add') }}">Add Page</a>
-                        </div>
+                    <div class="col-lg-6">
+                        <h3 class="card-title">Pages List</h3>
+                    </div>
+                    <div class="col-lg-6 d-flex justify-content-end">
+                        <a class="btn btn-sm btn-primary" href="{{ route('page.add') }}">Add Page</a>
+                    </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
                     <table id="data" class="table table-bordered mt-3">
@@ -32,7 +32,7 @@
                                 <th style="width: 10px">SL No</th>
                                 <th>Page Name</th>
                                 <th>Page Title</th>
-                                <th>Page Description</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,7 +63,6 @@
 
 @endsection
 @push('js')
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.jqueryui.js"></script>
@@ -84,6 +83,45 @@
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
             });
+
+            $('.delete').on('click', function() {
+                let data = $(this).attr('data-link');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = data;
+                    }
+                });
+            })
+
         });
     </script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
+    @if (session('distroy'))
+        <script>
+            Swal.fire({
+                title: "Deleted!",
+                text: "{{ session('distroy') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
 @endpush
