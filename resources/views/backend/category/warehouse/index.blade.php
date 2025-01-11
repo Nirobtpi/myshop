@@ -1,13 +1,15 @@
 @extends('layouts.admin-app')
-@section('Current_page', 'Page Create')
-@section('title', 'Page Create')
-@push('css')
-    <style>
-        .dt-paging {
-            display: none;
-        }
-    </style>
-@endpush
+@section('Current_list', 'Ware House')
+@section('title', 'Ware House')
+
+@section('content')
+    @push('css')
+        <style>
+            .dt-paging {
+                display: none;
+            }
+        </style>
+    @endpush
 
 @section('content')
     <div class="row">
@@ -15,10 +17,10 @@
             <div class="card mb-4">
                 <div class="card-header row">
                     <div class="col-lg-6">
-                        <h3 class="card-title">Pages List</h3>
+                        <h3 class="card-title">Ware House List</h3>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-end">
-                        <a class="btn btn-sm btn-primary" href="{{ route('page.add') }}">Add Page</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('warehouse.create') }}">Add Warehouse</a>
                     </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
@@ -26,22 +28,24 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">SL No</th>
-                                <th>Page Name</th>
-                                <th>Page Title</th>
+                                <th>Ware House Name</th>
+                                <th>Ware House Address</th>
+                                <th>Ware House Phone</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($pages as $key=>$page)
+                            @forelse ($lists as $key=>$list)
                                 <tr class="align-middle">
-                                    <td>{{ $pages->firstitem() + $key }}</td>
-                                    <td>{{ $page->page_name }}</td>
-                                    <td>{{ $page->page_title }}</td>
+                                    <td>{{ $lists->firstitem() + $key }}</td>
+                                    <td>{{ $list->warehouse_name }}</td>
+                                    <td>{{ $list->warehouse_address }}</td>
+                                    <td>{{ $list->warehouse_phone != "" ? "$list->warehouse_phone":"Null"  }}</td>
                                     <td>
-                                        <a href="{{ route('page.edit', $page->id) }}" class="btn btn-sm btn-success edit"><i
+                                        <a href="{{ route('warehouse.edit', $list->id) }}" class="btn btn-sm btn-success edit"><i
                                                 class="fa-regular fa-pen-to-square"></i>
                                         </a>
-                                        <a data-link="{{ route('page.distroy', $page->id) }}"
+                                        <a data-link="{{ route('warehouse.distroy', $list->id) }}"
                                             class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a>
                                     </td>
                                 </tr>
@@ -51,7 +55,7 @@
                                 </tr>
                             @endforelse
                     </table>
-                    {{ $pages->links('vendor.pagination.custom-pagination') }}
+                    {{ $lists->links('vendor.pagination.custom-pagination') }}
                 </div>
             </div>
         </div>
@@ -59,7 +63,6 @@
 
 @endsection
 @push('js')
-
     <script>
         $(document).ready(function() {
             $('#data').DataTable({
@@ -110,3 +113,5 @@
         </script>
     @endif
 @endpush
+
+@endsection

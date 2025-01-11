@@ -2,7 +2,7 @@
 @section('title', 'Page Add')
 @section('Current_page', 'Page Add')
 @push('css')
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+   
 @endpush
 
 @section('content')
@@ -51,8 +51,6 @@
         </div>
     @endsection
     @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
-
         <script>
             $(document).ready(function() {
                 $('#page_description').summernote({

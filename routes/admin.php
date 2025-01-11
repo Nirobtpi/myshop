@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ChildController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\WareHouseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -94,6 +95,13 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
       Route::get('edit/{id}',[PageController::class,'page_edit'])->name('page.edit');
       Route::post('update/{id}',[PageController::class,'update'])->name('page.update');
       Route::get('distroy/{id}',[PageController::class,'distroy'])->name('page.distroy');
+    });
+    Route::prefix('warehouse')->group(function(){
+      Route::get('/',[WareHouseController::class,'index'])->name('warehouse.index');
+      Route::get('/create',[WareHouseController::class,'create'])->name('warehouse.create');
+      Route::post('/store',[WareHouseController::class,'store'])->name('warehouse.store');
+      Route::get('/edit/{id}',[WareHouseController::class,'edit'])->name('warehouse.edit');
+      Route::get('/distroy/{id}',[WareHouseController::class,'distroy'])->name('warehouse.distroy');
     });
    
   });
