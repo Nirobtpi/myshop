@@ -27,6 +27,7 @@ Route::post('admin/password/reset/{id}',[AdminController::class,'admin_password_
 
 Route::middleware('isadmin')->prefix('admin')->group(function(){
 
+  // admin route 
   Route::get('dashboard',[AdminController::class,'admin_dashboard'])->name('admin.dashboard');
   Route::get('chnage-password',[AdminController::class,'changePasswword'])->name('admin.changepassword');
   Route::post('chnage-password/{id}',[AdminController::class,'change_passwword'])->name('admin.change.password');
@@ -44,6 +45,7 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::get('all/category',[CategoryController::class,'allCategory'])->name('category.all');
   });
 
+  // sub category route 
   Route::prefix('subcategory')->group(function(){
     Route::get('index',[SubCategoryController::class,'index'])->name('subcategory.index');
     Route::get('add/subcategory',[SubCategoryController::class,'addsubcategory'])->name('subcategory.add');
@@ -56,6 +58,7 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     
      
   });
+  // child Category route 
   Route::prefix('childcategory')->group(function(){
     Route::get('index',[ChildController::class,'index'])->name('childcategory.index');
     // get subcategory url with ajax 
@@ -67,8 +70,10 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::get('edit/{id}',[ChildController::class,'edit'])->name('childcategory.edit');
     Route::get('all/subcategory',[SubCategoryController::class,'getallSubCategory'])->name('subcategory.get.all');
     Route::post('update',[ChildController::class,'update'])->name('childcategory.update');
+
   });
   
+  // brand route 
   Route::prefix('brand')->group(function(){
      Route::get('index',[BrandController::class,'index'])->name('brand.index');
      Route::get('add',[BrandController::class,'add'])->name('brand.add');
@@ -79,7 +84,14 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
      Route::post('update/{id}',[BrandController::class,'update'])->name('brand.update');
   });
 
+  // Setting route 
   Route::prefix('setting')->group(function(){
+
+    Route::prefix('website')->group(function(){
+       Route::get('/',[SettingController::class,'website_setting'])->name('setting.website');
+       Route::post('/update/{id}',[SettingController::class,'update'])->name('setting.update');
+    });
+    // Seo route 
     Route::prefix('seo')->group(function(){
       Route::get('/',[SettingController::class,'seoSetting'])->name('seo.setting');
       Route::post('/update/{id}',[SettingController::class,'seoUpdate'])->name('seo.update');
@@ -101,6 +113,7 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
       Route::get('/create',[WareHouseController::class,'create'])->name('warehouse.create');
       Route::post('/store',[WareHouseController::class,'store'])->name('warehouse.store');
       Route::get('/edit/{id}',[WareHouseController::class,'edit'])->name('warehouse.edit');
+      Route::post('/update/{id}',[WareHouseController::class,'update'])->name('warehouse.update');
       Route::get('/distroy/{id}',[WareHouseController::class,'distroy'])->name('warehouse.distroy');
     });
    

@@ -311,7 +311,7 @@
                                         <p>SEO Settings</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('setting.website') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Websit Settings</p>
                                     </a>

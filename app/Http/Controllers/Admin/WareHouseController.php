@@ -30,4 +30,16 @@ class WareHouseController extends Controller
 
         return back()->with('distroy','Warehouse deleted successfully!');
     }
+    public function edit($id){
+        $warehouse=Warehouse::findOrFail($id);
+        return view('backend.category.warehouse.edit',compact('warehouse'));
+    }
+    public function update(Request $request,$id){
+        Warehouse::findOrFail($id)->update([
+            'warehouse_name'=>$request->warehouse_name,
+            'warehouse_address'=>$request->warehouse_address,
+            'warehouse_phone'=>$request->warehouse_phone,
+        ]);
+        return redirect()->route('warehouse.index')->with('success','Warehouse Updated Successfully!');
+    }
 }
