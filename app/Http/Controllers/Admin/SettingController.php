@@ -67,6 +67,9 @@ class SettingController extends Controller
            $request->validate([
             'logo'     => ['nullable','mimes:png,jpg,jpeg,svg', 'max:2048'],
            ]);
+            if($update->logo != ""){
+            unlink(public_path('uploads/website/'.$update->logo));
+           }
            $logo=$request->logo;
            $logoEx=$logo->extension();
            $logoname=uniqid().'logo'.'.'.$logoEx;
@@ -78,10 +81,14 @@ class SettingController extends Controller
             'logo'=>$logoname,
            ]);
         
-        }elseif($request->favicon !=''){
+        }
+        if($request->favicon !=''){
             $request->validate([
             'favicon'=> ['nullable','mimes:png,jpg,jpeg,svg', 'max:2048'],
            ]);
+           if($update->favicon != ""){
+            unlink(public_path('uploads/website/'.$update->favicon));
+           }
            $favicon=$request->favicon;
            $faviconEx=$favicon->extension();
            $faviconname=uniqid().'favicon'.'.'.$faviconEx;
@@ -89,31 +96,49 @@ class SettingController extends Controller
            $image = $manager->read($favicon);
            $image->save(public_path('uploads/website/').$faviconname);
            $update->update([
-            'logo'=>$faviconname,
+            'favicon'=>$faviconname,
            ]);
-        }elseif($request->phone_one !=''){
+        }
+        if($request->phone_one !=''){
             $request->validate([
             'phone_one'=>['numeric','regex:/^(?:\+88|88)?(01[3-9]\d{8})$/'],
            ]);
-        }elseif($request->phone_two !=''){
+           $update->update([
+            'phone_one'=>$request->phone_one,
+           ]);
+        }
+        
+        if($request->phone_two !=''){
             $request->validate([
             'phone_two'=>['numeric','regex:/^(?:\+88|88)?(01[3-9]\d{8})$/'],
            ]);
-        }else{
-            $update->update([
-                'currency'=>$request->currency,
-                'phone_one'=>$request->phone_one,
-                'phone_two'=>$request->phone_two,
-                'mail_email'=>$request->mail_email,
-                'support_email'=>$request->support_email,
-                'address'=>$request->address,
-                'facebook'=>$request->facebook,
-                'twitter'=>$request->twitter,
-                'instagram'=>$request->instagram,
-                'linkedin'=>$request->linkedin,
-                'youtube'=>$request->youtube,
-            ]);
+           $update->update([
+            'phone_two'=>$request->phone_two,
+            
+           ]);
+
         }
+        $oldLogo=$update->logo;
+        $oldFav=$update->favicon;
+        $oldphone1=$update->phone_one;
+        $oldphone2=$update->phone_two;
+        
+        $update->update([
+            'currency'=>$request->currency,
+            'mail_email'=>$request->mail_email,
+            'support_email'=>$request->support_email,
+            'address'=>$request->address,
+            'logo'=>$oldLogo,
+            'favicon'=>$oldFav,
+            'phone_one'=>$oldphone1,
+            'phone_two'=>$oldphone2,
+            'facebook'=>$request->facebook,
+            'twitter'=>$request->twitter,
+            'instagram'=>$request->instagram,
+            'linkedin'=>$request->linkedin,
+            'youtube'=>$request->youtube,
+        ]);
+        
         return back()->with('success','Data Updated Successfully');
         
     }
