@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildController;
+use App\Http\Controllers\Admin\CuponController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -87,10 +88,19 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
   // Setting route 
   Route::prefix('setting')->group(function(){
 
+    // website setting 
     Route::prefix('website')->group(function(){
        Route::get('/',[SettingController::class,'website_setting'])->name('setting.website');
        Route::post('/update/{id}',[SettingController::class,'update'])->name('setting.update');
     });
+
+    // cupon code 
+    Route::prefix('cupon')->group(function(){
+       Route::get('/',[CuponController::class,'index'])->name('cupon.index');
+       Route::get('/add',[CuponController::class,'add'])->name('cupon.add');
+       Route::post('/update/{id}',[SettingController::class,'update'])->name('setting.update');
+    });
+
     // Seo route 
     Route::prefix('seo')->group(function(){
       Route::get('/',[SettingController::class,'seoSetting'])->name('seo.setting');

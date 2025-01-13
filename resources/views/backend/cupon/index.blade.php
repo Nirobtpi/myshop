@@ -6,6 +6,7 @@
         .dt-paging {
             display: none;
         }
+
         .dt-search {
             display: flex;
             justify-content: end;
@@ -23,34 +24,39 @@
             <div class="card mb-4">
                 <div class="card-header row">
                     <div class="col-lg-6">
-                        <h3 class="card-title">Pages List</h3>
+                        <h3 class="card-title">Cupon Code List</h3>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-end">
-                        <a class="btn btn-sm btn-primary" href="{{ route('page.add') }}">Add Page</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('cupon.add') }}">Add Cupon Code</a>
                     </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="data" class="table table-bordered mt-3">
+                    <table id="data" class="table table-bordered mt-5">
                         <thead>
                             <tr>
                                 <th style="width: 10px">SL No</th>
-                                <th>Page Name</th>
-                                <th>Page Title</th>
+                                <th>Cupon Code</th>
+                                <th>Valid Date</th>
+                                <th>Type</th>
+                                <th>Discount Ammount</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($pages as $key=>$page)
+                            @forelse ($cuponCodes as $key=>$cuponCode)
                                 <tr class="align-middle">
-                                    <td>{{ $pages->firstitem() + $key }}</td>
-                                    <td>{{ $page->page_name }}</td>
-                                    <td>{{ $page->page_title }}</td>
+                                    <td>{{ $cuponCods->firstitem() + $key }}</td>
+                                    <td>{{ $cuponCode->cupon_code }}</td>
+                                    <td>{{ $pagcuponCode->vailid_data }}</td>
+                                    <td>{{ $pagcuponCode->type }}</td>
+                                    <td>{{ $pagcuponCode->cupon_ammount }}</td>
+                                    <td>{{ $pagcuponCode->status }}</td>
                                     <td>
-                                        <a href="{{ route('page.edit', $page->id) }}" class="btn btn-sm btn-success edit"><i
-                                                class="fa-regular fa-pen-to-square"></i>
-                                        </a>
-                                        <a data-link="{{ route('page.distroy', $page->id) }}"
-                                            class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a>
+                                        {{-- <a href="{{ route('page.edit', $cuponCode->id) }}" class="btn btn-sm btn-success
+                                edit"><i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                                <a data-link="{{ route('page.distroy', $cuponCode->id) }}"
+                                    class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a> --}}
                                     </td>
                                 </tr>
                             @empty
@@ -59,7 +65,7 @@
                                 </tr>
                             @endforelse
                     </table>
-                    {{ $pages->links('vendor.pagination.custom-pagination') }}
+                    {{ $cuponCodes->links('vendor.pagination.custom-pagination') }}
                 </div>
             </div>
         </div>
@@ -67,11 +73,10 @@
 
 @endsection
 @push('js')
-
     <script>
         $(document).ready(function() {
             $('#data').DataTable({
-                dom: 'Bfrtip', // Enable Buttons with Filter, Table, Pagination
+                dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
