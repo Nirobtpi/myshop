@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cupons', function (Blueprint $table) {
             $table->id();
             $table->string('cupon_code')->nullable();
-            $table->string('vailid_data')->nullable();
+            $table->string('valid_date')->nullable();
             $table->integer('type')->nullable();
             $table->integer('cupon_ammount')->nullable();
             $table->string('status')->nullable();

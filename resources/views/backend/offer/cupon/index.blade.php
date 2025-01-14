@@ -39,24 +39,31 @@
                                 <th>Valid Date</th>
                                 <th>Type</th>
                                 <th>Discount Ammount</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($cuponCodes as $key=>$cuponCode)
                                 <tr class="align-middle">
-                                    <td>{{ $cuponCods->firstitem() + $key }}</td>
+                                    <td>{{ $cuponCodes->firstitem() + $key }}</td>
                                     <td>{{ $cuponCode->cupon_code }}</td>
-                                    <td>{{ $pagcuponCode->vailid_data }}</td>
-                                    <td>{{ $pagcuponCode->type }}</td>
-                                    <td>{{ $pagcuponCode->cupon_ammount }}</td>
-                                    <td>{{ $pagcuponCode->status }}</td>
                                     <td>
-                                        {{-- <a href="{{ route('page.edit', $cuponCode->id) }}" class="btn btn-sm btn-success
-                                edit"><i class="fa-regular fa-pen-to-square"></i>
-                                </a>
-                                <a data-link="{{ route('page.distroy', $cuponCode->id) }}"
-                                    class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a> --}}
+                                        {{ $cuponCode->created_at <= $cuponCode->valid_date ? 'Valid Code' : 'Expaired' }}
+                                    </td>
+                                    <td>{{ $cuponCode->type == '1' ? 'Fixed' : 'Persentage' }}</td>
+                                    <td>{{ $cuponCode->cupon_ammount }} {{ $cuponCode->type == '1' ? 'Fixed' : '%' }}</td>
+                                    <td><span
+                                            class="badge bg-{{ $cuponCode->status == 0 ? 'info' : 'success' }}">{{ $cuponCode->status == 0 ? 'Pending' : 'Active' }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('cupon.edit', $cuponCode->id) }}"
+                                            class="btn btn-sm btn-success
+                                edit"><i
+                                                class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                        <a data-link="{{ route('cupon.distroy', $cuponCode->id) }}"
+                                            class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a>
                                     </td>
                                 </tr>
                             @empty

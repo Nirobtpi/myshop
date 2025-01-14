@@ -98,7 +98,9 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::prefix('cupon')->group(function(){
        Route::get('/',[CuponController::class,'index'])->name('cupon.index');
        Route::get('/add',[CuponController::class,'add'])->name('cupon.add');
-       Route::post('/update/{id}',[SettingController::class,'update'])->name('setting.update');
+       Route::post('/store',[CuponController::class,'store'])->name('cupon.store');
+       Route::get('/edit/{id}',[CuponController::class,'edit'])->name('cupon.edit');
+       Route::get('/distroy/{id}',[CuponController::class,'distroy'])->name('cupon.distroy');
     });
 
     // Seo route 
