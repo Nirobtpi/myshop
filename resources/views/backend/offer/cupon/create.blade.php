@@ -23,7 +23,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="vailid_data" class="form-label">Valide Date</label>
-                            <input type="date" class="form-control" value="{{ old('valid_date') }}" name="vailid_data"
+                            <input type="date" class="form-control" value="{{ old('valid_date') }}" name="valid_date"
                                 id="vailid_data">
                             @error('vailid_data')
                                 <p class="text-danger">{{ $message }}</p>

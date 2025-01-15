@@ -19,14 +19,15 @@ class CuponController extends Controller
     public function store(Request $request){
         $request->validate([
             'cupon_code'=>['required','min:6'],
-            'vailid_data'=>['required','date'],
+            'valid_date'=>['required','date'],
             'type'=>['required'],
             'cupon_ammount'=>['required','numeric'],
         ]);
         Cupon::create([
             'cupon_code'=>$request->cupon_code,
-            'vailid_data'=>$request->vailid_data,
+            'valid_date'=>$request->valid_date,
             'type'=>$request->type,
+            'status'=>$request->status,
             'cupon_ammount'=>$request->cupon_ammount,
         ]);
 
@@ -41,5 +42,21 @@ class CuponController extends Controller
     public function edit($id){
         $data=Cupon::findOrFail($id);
         return view('backend.offer.cupon.edit',compact('data'));
+    }
+    public function update(Request $request,$id){
+        $request->validate([
+            'cupon_code'=>['required','min:6'],
+            'valid_date'=>['required','date'],
+            'type'=>['required'],
+            'cupon_ammount'=>['required','numeric'],
+        ]);
+        Cupon::findOrFail($id)->update([
+            'cupon_code'=>$request->cupon_code,
+            'valid_date'=>$request->valid_date,
+            'type'=>$request->type,
+            'status'=>$request->status,
+            'cupon_ammount'=>$request->cupon_ammount,
+        ]);
+        return redirect()->route('cupon.index')->with('success','Data Updated Successfully');
     }
 }

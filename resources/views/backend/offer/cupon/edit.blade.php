@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <div class="card-title">Update Cupon Code</div>
                 </div>
-                <form action="{{ route('cupon.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('cupon.update',$data->id) }}" method="POST" >
                     @csrf
                     <div class="card-body">
                         <div class="mb-3">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="valid_date" class="form-label">Valide Date</label>
-                            <input type="date" class="form-control" value="{{ $data->valid_date }} " name="valid_date"
+                            <input type="date" class="form-control" value="{{ $data->valid_date }}" name="valid_date"
                                 id="valid_date">
                             @error('valid_date')
                                 <p class="text-danger">{{ $message }}</p>
