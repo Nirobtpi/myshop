@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildController;
 use App\Http\Controllers\Admin\CuponController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PickupController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\WareHouseController;
@@ -84,6 +85,25 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
      Route::get('edit/{id}',[BrandController::class,'edit'])->name('brand.edit');
      Route::post('update/{id}',[BrandController::class,'update'])->name('brand.update');
   });
+  // cupon code 
+  Route::prefix('cupon')->group(function(){
+    Route::get('/',[CuponController::class,'index'])->name('cupon.index');
+    Route::get('/add',[CuponController::class,'add'])->name('cupon.add');
+    Route::post('/store',[CuponController::class,'store'])->name('cupon.store');
+    Route::post('/update/{id}',[CuponController::class,'update'])->name('cupon.update');
+    Route::get('/edit/{id}',[CuponController::class,'edit'])->name('cupon.edit');
+    Route::get('/distroy/{id}',[CuponController::class,'distroy'])->name('cupon.distroy');
+  });
+
+    // pickup point 
+  Route::prefix('pickup-point')->group(function(){
+    Route::get('/',[PickupController::class,'pickup_Point'])->name('pickuppoint.index');
+    Route::get('/add',[PickupController::class,'create'])->name('pickuppoint.add');
+    Route::get('/edit/{id}',[PickupController::class,'edit'])->name('pickuppoint.edit');
+    Route::post('/store',[PickupController::class,'store'])->name('pickuppoint.store');
+    Route::post('/update/{id}',[PickupController::class,'update'])->name('pickuppoint.update');
+    Route::get('/distroy/{id}',[PickupController::class,'distroy'])->name('pickuppoint.distroy');
+  });
 
   // Setting route 
   Route::prefix('setting')->group(function(){
@@ -93,26 +113,19 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
        Route::get('/',[SettingController::class,'website_setting'])->name('setting.website');
        Route::post('/update/{id}',[SettingController::class,'update'])->name('setting.update');
     });
-
-    // cupon code 
-    Route::prefix('cupon')->group(function(){
-       Route::get('/',[CuponController::class,'index'])->name('cupon.index');
-       Route::get('/add',[CuponController::class,'add'])->name('cupon.add');
-       Route::post('/store',[CuponController::class,'store'])->name('cupon.store');
-       Route::post('/update/{id}',[CuponController::class,'update'])->name('cupon.update');
-       Route::get('/edit/{id}',[CuponController::class,'edit'])->name('cupon.edit');
-       Route::get('/distroy/{id}',[CuponController::class,'distroy'])->name('cupon.distroy');
-    });
-
     // Seo route 
     Route::prefix('seo')->group(function(){
       Route::get('/',[SettingController::class,'seoSetting'])->name('seo.setting');
       Route::post('/update/{id}',[SettingController::class,'seoUpdate'])->name('seo.update');
     });
+
+    // Smtp 
     Route::prefix('smtp')->group(function(){
       Route::get('/',[SettingController::class,'smtpSetting'])->name('smtp.setting');
       Route::post('/update/{id}',[SettingController::class,'smtpUpdate'])->name('smtp.update');
     });
+
+    // page 
     Route::prefix('page')->group(function(){
       Route::get('/',[PageController::class,'pageSetting'])->name('page.index');
       Route::get('/add',[PageController::class,'addPage'])->name('page.add');
@@ -121,6 +134,8 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
       Route::post('update/{id}',[PageController::class,'update'])->name('page.update');
       Route::get('distroy/{id}',[PageController::class,'distroy'])->name('page.distroy');
     });
+
+    // warehouse 
     Route::prefix('warehouse')->group(function(){
       Route::get('/',[WareHouseController::class,'index'])->name('warehouse.index');
       Route::get('/create',[WareHouseController::class,'create'])->name('warehouse.create');

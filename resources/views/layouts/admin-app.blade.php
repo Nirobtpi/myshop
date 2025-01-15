@@ -302,6 +302,22 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-clipboard-fill"></i>
+                                <p>
+                                    Pickup Point
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{ route('pickuppoint.index') }}"
+                                        class="nav-link {{ Route::is('cupon.index') ? 'active' : '' }}"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Pickup Point</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="nav-header">Settings</li>
                         <li class="nav-item"> <a href="#" class="nav-link"> <i
