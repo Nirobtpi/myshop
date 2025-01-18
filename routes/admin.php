@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ChildController;
 use App\Http\Controllers\Admin\CuponController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PickupController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\WareHouseController;
@@ -103,6 +104,13 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::post('/store',[PickupController::class,'store'])->name('pickuppoint.store');
     Route::post('/update/{id}',[PickupController::class,'update'])->name('pickuppoint.update');
     Route::get('/distroy/{id}',[PickupController::class,'distroy'])->name('pickuppoint.distroy');
+  });
+
+  // product route 
+
+  Route::group(['prefix'=>'product'],function(){
+    route::get('/',[ProductController::class,'create'])->name('product.create');
+    route::post('store',[ProductController::class,'store'])->name('product.store');
   });
 
   // Setting route 
