@@ -32,8 +32,8 @@ return new class extends Migration
             $table->string('images')->nullable();
             $table->integer('feature')->nullable();
             $table->integer('today_deal')->nullable();
-            $table->integer('color')->nullable();
-            $table->integer('size')->nullable();
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->integer('status')->nullable();
             $table->integer('false_deal_id')->nullable();
             $table->integer('case_on_delevery')->nullable();
