@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
 
 @endpush
 @section('content')
@@ -43,7 +45,10 @@
                                     <label for="category_id" class="form-label">Category Name<span
                                             class="text-danger">*</span></label>
                                     <select name="category_id" class="form-control" id="category_id">
-                                        <option value="">1</option>
+                                        <option >Choose Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('category_id')
                                     <p class="text-danger">{{ $message }}</p>
@@ -53,7 +58,7 @@
                                     <label for="subcategory_id" class="form-label">Sub Category Name<span
                                             class="text-danger">*</span></label>
                                     <select name="subcategory_id" class="form-control" id="subcategory_id">
-                                        <option value="">1</option>
+                                        <option value="">Choose Category</option>
                                     </select>
                                     @error('subcategory_id')
                                     <p class="text-danger">{{ $message }}</p>
@@ -62,39 +67,34 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-lg-6">
+                                    <label for="childcategory_id" class="form-label">Child Category Name</label>
+                                    <select name="childcategory_id" class="form-control" id="childcategory_id">
+                                        <option value="">Choose Child Category</option>
+                                    </select>
+                                    @error('childcategory_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6">
                                     <label for="brand_id" class="form-label">Brand Name<span
                                             class="text-danger">*</span></label>
                                     <select name="brand_id" class="form-control" id="brand_id">
-                                        <option value="">1</option>
+                                        <option selected="">Choose Brand</option>
+                                        @foreach ($brands as $brand)
+                                             <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                        @endforeach
+                                       
                                     </select>
                                     @error('brand_id')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <div class="col-lg-6">
-                                    <label for="pickup_point_id" class="form-label">Pickup Point</label>
-                                    <select name="pickup_point_id" class="form-control" id="pickup_point_id">
-                                        <option value="">1</option>
-                                    </select>
-                                    @error('pickup_point_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-lg-6">
-                                    <label for="unit" class="form-label">Unit</label>
-                                    <select name="unit" class="form-control" id="unit">
-                                        <option value="">1</option>
-                                    </select>
+                                <div class="col-lg-12">
+                                    <label for="unit" class="form-label">Unit<span class="text-danger">*</span></label>
+                                    <input type="text" name="unit" class="form-control" id="unit">
                                     @error('unit')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="tags" class="form-label">Tags</label>
-                                    <input class="form-control" type="text" name="tags" id="tags">
-                                    @error('tags')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -128,7 +128,11 @@
                                     <label for="warehouse_id" class="form-label">Warehouse<span
                                             class="text-danger">*</span></label>
                                     <select name="warehouse_id" class="form-control" id="warehouse_id">
-                                        <option value="">1</option>
+                                        <option selected="">Choose Warehouse</option>
+                                        @foreach ($warehouses as $row)
+                                            <option value="{{ $row->id }}">{{ $row->warehouse_name }}</option>
+                                        @endforeach
+                                        
                                     </select>
                                     @error('warehouse_id')
                                     <p class="text-danger">{{ $message }}</p>
@@ -143,18 +147,25 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <label for="color" class="form-label">Color</label>
-                                    <input class="form-control" type="text" name="color" id="color">
+                                    <input class="form-control multy" type="text" name="color[]" id="color">
                                     @error('color')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <label for="size" class="form-label">Size</label>
-                                    <input class="form-control" type="text" name="size" id="size">
+                                    <input class="form-control multy" type="text" name="size[]" id="size">
                                     @error('size')
                                     <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="tags" class="form-label">Tags</label>
+                                    <input class="form-control multy" type="text" name="tags" data-role="tags" id="tags">
+                                    @error('tags')
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -231,6 +242,8 @@
 @push('js')
     <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#description').summernote({
@@ -254,6 +267,74 @@
             $('#more-image').on('click', '.remove-field', function () {
                 $(this).closest('.image-upload-field').remove();
             });
+
+           // get sub category  
+
+           $('#category_id').on('change',function(){
+                let id=$(this).val();
+                $.ajax({
+                    url:`product/sub-category/`+id,
+                    type:'GET',
+                    success:function(response){
+                        // console.log(response);
+                        const option=$('#subcategory_id');
+                        option.empty();
+                        option.append(`<option selected>Choose Sub Category</option>`);
+                        response.forEach(subcategory => {
+                         option.append(`<option value="${subcategory.id}">${subcategory.name}</option>`);
+                        });
+                    }
+                });
+           });
+
+          // get child category id with sub-category id 
+
+          $('#subcategory_id').on('change',function(){
+            let id=$(this).val();
+
+            $.ajax({
+                url:`product/child-category/`+id,
+                type:'GET',
+                success:function(response){
+                    // console.log(response);
+                    let childCat=$('#childcategory_id');
+                    childCat.empty();
+                    childCat.append(`<option selected="">Choose Child Category</option>`);
+                    response.forEach(child_cat => {
+                        childCat.append(`<option value="${child_cat.id}">${child_cat.name}</option>`);
+                    });
+                }
+            });
+          });
+
+        // Reusable Tagify initializer function
+            function initializeTagify(selector, options = {}) {
+                const $input = $(selector); // Select the input field
+                const defaultOptions = {
+                };
+
+                // Merge user-provided options with default options
+                const finalOptions = { ...defaultOptions, ...options };
+
+                // Initialize Tagify
+                const tagify = new Tagify($input[0], finalOptions);
+
+                // Add event listeners
+                $($input[0]).on('add', function (e, tagData) {
+                    console.log(`Added tag to ${selector}:`, tagData.value);
+                });
+
+                $($input[0]).on('remove', function (e, tagData) {
+                    console.log(`Removed tag from ${selector}:`, tagData.value);
+                });
+
+                // Return the Tagify instance for further customization if needed
+                return tagify;
+            }
+            const tags= initializeTagify('#tags')
+            const color= initializeTagify('#color')
+            const size= initializeTagify('#size')
+
         });
 
     </script>
