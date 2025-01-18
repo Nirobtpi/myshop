@@ -103,7 +103,8 @@
                                     <div class="flex-grow-1">
                                         <h3 class="dropdown-item-title">
                                             John Pierce
-                                            <span class="float-end fs-7 text-secondary"> <i class="bi bi-star-fill"></i>
+                                            <span class="float-end fs-7 text-secondary"> <i
+                                                    class="bi bi-star-fill"></i>
                                             </span>
                                         </h3>
                                         <p class="fs-7">I got your message bro</p>
@@ -118,8 +119,8 @@
                                 <!--begin::Message-->
                                 <div class="d-flex">
                                     <div class="flex-shrink-0"> <img
-                                            src="{{ asset('backend') }}/assets/img/user3-128x128.jpg" alt="User Avatar"
-                                            class="img-size-50 rounded-circle me-3"> </div>
+                                            src="{{ asset('backend') }}/assets/img/user3-128x128.jpg"
+                                            alt="User Avatar" class="img-size-50 rounded-circle me-3"> </div>
                                     <div class="flex-grow-1">
                                         <h3 class="dropdown-item-title">
                                             Nora Silvester
@@ -134,14 +135,16 @@
                                 </div>
                                 <!--end::Message-->
                             </a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item dropdown-footer">See
+                            <div class="dropdown-divider"></div> <a href="#"
+                                class="dropdown-item dropdown-footer">See
                                 All Messages</a>
                         </div>
                     </li>
                     <!--end::Messages Dropdown Menu-->
                     <!--begin::Notifications Dropdown Menu-->
                     <li class="nav-item dropdown"> <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i
-                                class="bi bi-bell-fill"></i> <span class="navbar-badge badge text-bg-warning">15</span>
+                                class="bi bi-bell-fill"></i> <span
+                                class="navbar-badge badge text-bg-warning">15</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <span
                                 class="dropdown-item dropdown-header">15 Notifications</span>
@@ -154,7 +157,8 @@
                             <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"> <i
                                     class="bi bi-file-earmark-fill me-2"></i> 3 new reports
                                 <span class="float-end text-secondary fs-7">2 days</span> </a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item dropdown-footer">
+                            <div class="dropdown-divider"></div> <a href="#"
+                                class="dropdown-item dropdown-footer">
                                 See All Notifications
                             </a>
                         </div>
@@ -276,30 +280,48 @@
                                 </li>
                             </ul>
                         </li>
-
-
-                        <li class="nav-header">PROFILE</li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle-fill"></i>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-clipboard-fill"></i>
                                 <p>
-                                    Profile Info
+                                    Offer
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="{{ route('admin.changepassword') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href="{{ route('cupon.index') }}"
+                                        class="nav-link {{ Route::is('cupon.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
-                                        <p>Change Password</p>
+                                        <p>Cupon</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                <li class="nav-item"> <a href=""
+                                        class="nav-link {{ Route::is('category.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
-                                        <p>Logout</p>
+                                        <p>E Campain</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-clipboard-fill"></i>
+                                <p>
+                                    Pickup Point
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{ route('pickuppoint.index') }}"
+                                        class="nav-link {{ Route::is('cupon.index') ? 'active' : '' }}"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Pickup Point</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-header">Settings</li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle-fill"></i>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-circle-fill"></i>
                                 <p>
                                     Settings
                                     <i class="nav-arrow bi bi-chevron-right"></i>
@@ -324,6 +346,28 @@
                                 <li class="nav-item"> <a href="{{ route('smtp.setting') }}" class="nav-link"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Smtp Setting</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-header">PROFILE</li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i
+                                    class="nav-icon bi bi-circle-fill"></i>
+                                <p>
+                                    Profile Info
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <a href="{{ route('admin.changepassword') }}"
+                                        class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                                        <p>Change Password</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item"> <a href="{{ route('admin.logout') }}" class="nav-link"> <i
+                                            class="nav-icon bi bi-circle"></i>
+                                        <p>Logout</p>
                                     </a>
                                 </li>
                             </ul>
@@ -416,7 +460,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
     <script src="{{ asset('backend') }}/js/adminlte.js"></script>
     @stack('js')
     <script>
@@ -426,7 +470,7 @@
             scrollbarAutoHide: "leave",
             scrollbarClickScroll: true,
         };
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
             if (
                 sidebarWrapper &&
@@ -441,7 +485,6 @@
                 });
             }
         });
-
     </script>
     <!--end::OverlayScrollbars Configure-->
     <!-- OPTIONAL SCRIPTS -->
@@ -465,7 +508,6 @@
         cardHeaders.forEach((cardHeader) => {
             cardHeader.style.cursor = "move";
         });
-
     </script> <!-- apexcharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
         integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
@@ -526,7 +568,6 @@
             sales_chart_options,
         );
         sales_chart.render();
-
     </script> <!-- jsvectormap -->
     <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
         integrity="sha256-/t1nN2956BT869E6H4V1dnt0X5pAQHPytli+1nTZm2Y=" crossorigin="anonymous"></script>
@@ -641,7 +682,6 @@
             option_sparkline3,
         );
         sparkline3.render();
-
     </script>
     <!--end::Script-->
 </body>

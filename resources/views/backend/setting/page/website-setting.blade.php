@@ -45,7 +45,6 @@
                             <label for="support_email" class="form-label">Support Email</label>
                             <input type="email" name="support_email" class="form-control" id="support_email"
                                 value="{{ $data->support_email }}"> 
-                                
                         </div>
                         <div class="mb-3">
                             <label for="logo" class="form-label">Logo</label>

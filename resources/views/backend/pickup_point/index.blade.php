@@ -1,11 +1,12 @@
 @extends('layouts.admin-app')
-@section('Current_page', 'Page Create')
-@section('title', 'Page Create')
+@section('Current_page', 'Pickup Point')
+@section('title', 'Pickup Point')
 @push('css')
     <style>
         .dt-paging {
             display: none;
         }
+
         .dt-search {
             display: flex;
             justify-content: end;
@@ -23,33 +24,40 @@
             <div class="card mb-4">
                 <div class="card-header row">
                     <div class="col-lg-6">
-                        <h3 class="card-title">Pages List</h3>
+                        <h3 class="card-title">Cupon Code List</h3>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-end">
-                        <a class="btn btn-sm btn-primary" href="{{ route('page.add') }}">Add Page</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('pickuppoint.add') }}">Add Cupon Code</a>
                     </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="data" class="table table-bordered mt-3">
+                    <table id="data" class="table table-bordered mt-5">
                         <thead>
                             <tr>
                                 <th style="width: 10px">SL No</th>
-                                <th>Page Name</th>
-                                <th>Page Title</th>
+                                <th>Pickup Point Name</th>
+                                <th>Address</th>
+                                <th>Phone One</th>
+                                <th>Phone Two</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($pages as $key=>$page)
+                            @forelse ($pickuppoints as $key=>$pickuppoint)
                                 <tr class="align-middle">
-                                    <td>{{ $pages->firstitem() + $key }}</td>
-                                    <td>{{ $page->page_name }}</td>
-                                    <td>{{ $page->page_title }}</td>
+                                    <td>{{ $pickuppoints->firstitem() + $key }}</td>
+                                    <td>{{ $pickuppoint->pickup_point_name }}</td>
+                                    <td>{{ $pickuppoint->pickup_point_address }}</td>
+                                    <td>{{ $pickuppoint->pickup_point_phone }}</td>
+                                    <td>{{ $pickuppoint->pickup_point_phone_two == "" ? 'No Number':"$pickuppoint->pickup_point_phone_two" }}</td>
+
                                     <td>
-                                        <a href="{{ route('page.edit', $page->id) }}" class="btn btn-sm btn-success edit"><i
+                                        <a href="{{ route('pickuppoint.edit', $pickuppoint->id) }}"
+                                            class="btn btn-sm btn-success
+                                edit"><i
                                                 class="fa-regular fa-pen-to-square"></i>
                                         </a>
-                                        <a data-link="{{ route('page.distroy', $page->id) }}"
+                                        <a data-link="{{ route('pickuppoint.distroy', $pickuppoint->id) }}"
                                             class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a>
                                     </td>
                                 </tr>
@@ -59,7 +67,7 @@
                                 </tr>
                             @endforelse
                     </table>
-                    {{ $pages->links('vendor.pagination.custom-pagination') }}
+                    {{ $pickuppoints->links('vendor.pagination.custom-pagination') }}
                 </div>
             </div>
         </div>
@@ -67,11 +75,10 @@
 
 @endsection
 @push('js')
-
     <script>
         $(document).ready(function() {
             $('#data').DataTable({
-                dom: 'Bfrtip', // Enable Buttons with Filter, Table, Pagination
+                dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
