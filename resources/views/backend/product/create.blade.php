@@ -149,23 +149,24 @@
                             <div class="row mb-3">
                                 <div class="col-lg-4">
                                     <label for="color" class="form-label">Color</label>
-                                    <input class="form-control multy" type="text" name="color[]" id="color">
+                                    <input class="form-control" type="text" name="color[]" id="color">
                                     @error('color')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="size" class="form-label">Size</label>
-                                    <input class="form-control multy" type="text" name="size[]" id="size">
+                                    <input class="form-control" type="text" name="size[]" id="size">
                                     @error('size')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="tags" class="form-label">Tags</label>
-                                    <input class="form-control multy" type="text" name="tags" data-role="tags" id="tags">
+                                    <input class="form-control" type="text" name="tags" data-role="tags" id="tags">
                                     @error('tags')
                                         <p class="text-danger">{{ $message }}</p>
+                                        hello
                                     @enderror
                                 </div>
                             </div>
