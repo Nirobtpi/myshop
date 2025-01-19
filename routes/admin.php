@@ -111,9 +111,11 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
   Route::group(['prefix'=>'product'],function(){
     route::get('/',[ProductController::class,'create'])->name('product.create');
     route::post('store',[ProductController::class,'store'])->name('product.store');
-    route::get('sub-category/{id}',[ProductController::class,'subCategory'])->name('product.subcategory');
-    route::get('child-category/{id}',[ProductController::class,'childCategory'])->name('product.childcategory');
   });
+
+ // Global route here 
+    route::get('sub-category/{id}',[ProductController::class,'subCategory'])->name('ajax.subcategory');
+    route::get('child-category/{id}',[ProductController::class,'childCategory'])->name('ajax.childcategory');
 
   // Setting route 
   Route::prefix('setting')->group(function(){

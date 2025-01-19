@@ -11,6 +11,7 @@
 @endpush
 @section('content')
 <div class="row">
+
     <div class="col-md-12">
         <form action="{{ route('product.store') }}" id="product" method="POST" enctype="multipart/form-data">
             @csrf
@@ -26,7 +27,7 @@
                                 <div class="col-lg-6">
                                     <label for="name" class="form-label">Product Name<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="name">
+                                    <input type="text" class="form-control" name="name" id="name">
                                     @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -45,20 +46,20 @@
                                     <label for="category_id" class="form-label">Category Name<span
                                             class="text-danger">*</span></label>
                                     <select name="category_id" class="form-control" id="category_id">
-                                        <option >Choose Category</option>
+                                        <option selected  value="">Choose Category</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('category_id')
+                                @error('category_id')
                                     <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+                                @enderror
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="subcategory_id" class="form-label">Sub Category Name<span
                                             class="text-danger">*</span></label>
                                     <select name="subcategory_id" class="form-control" id="subcategory_id">
-                                        <option value="">Choose Category</option>
+                                        <option selected=""  value="">Choose Category</option>
                                     </select>
                                     @error('subcategory_id')
                                     <p class="text-danger">{{ $message }}</p>
@@ -79,7 +80,7 @@
                                     <label for="brand_id" class="form-label">Brand Name<span
                                             class="text-danger">*</span></label>
                                     <select name="brand_id" class="form-control" id="brand_id">
-                                        <option selected="">Choose Brand</option>
+                                        <option selected="" value="">Choose Brand</option>
                                         @foreach ($brands as $brand)
                                              <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
                                         @endforeach
@@ -128,7 +129,7 @@
                                     <label for="warehouse_id" class="form-label">Warehouse<span
                                             class="text-danger">*</span></label>
                                     <select name="warehouse_id" class="form-control" id="warehouse_id">
-                                        <option selected="">Choose Warehouse</option>
+                                        <option selected="" value="">Choose Warehouse</option>
                                         @foreach ($warehouses as $row)
                                             <option value="{{ $row->id }}">{{ $row->warehouse_name }}</option>
                                         @endforeach
@@ -149,14 +150,14 @@
                             <div class="row mb-3">
                                 <div class="col-lg-4">
                                     <label for="color" class="form-label">Color</label>
-                                    <input class="form-control" type="text" name="color[]" id="color">
+                                    <input class="form-control" type="text" name="color" id="color">
                                     @error('color')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="size" class="form-label">Size</label>
-                                    <input class="form-control" type="text" name="size[]" id="size">
+                                    <input class="form-control" type="text" name="size" id="size">
                                     @error('size')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -166,7 +167,6 @@
                                     <input class="form-control" type="text" name="tags" data-role="tags" id="tags">
                                     @error('tags')
                                         <p class="text-danger">{{ $message }}</p>
-                                        hello
                                     @enderror
                                 </div>
                             </div>
@@ -213,19 +213,19 @@
                             <div class="col">
                                 <div class="mb-3 shadow p-3">
                                     <label for="feature" class="form-label">Feature Product</label><br>
-                                    <input type="checkbox" id="feature" name="feature" checked data-toggle="toggle" data-width="100">
+                                    <input type="checkbox" id="feature" value="1" name="feature" checked data-toggle="toggle" data-width="100">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3 shadow p-3">
                                     <label for="today_deal " class="form-label">Today Deal</label><br>
-                                    <input type="checkbox" id="today_deal " name="today_deal " checked data-toggle="toggle-2" data-width="100">
+                                    <input type="checkbox" id="today_deal" value="1" name="today_deal " checked data-toggle="toggle-2" data-width="100">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3 shadow p-3">
                                     <label for="status " class="form-label">Status</label><br>
-                                    <input type="checkbox" id="status " name="status " checked data-toggle="toggle-3" data-width="100">
+                                    <input type="checkbox" id="status " name="status" value="1" checked data-toggle="toggle-3" data-width="100">
                                 </div>
                             </div>
 
@@ -257,7 +257,7 @@
 
                 let newField = `
                       <div class="image-upload-field mb-4">
-                         <input class="form-control" type="file" name="images[]" />
+                         <input class="form-control" type="file" />
                         <button type="button" class="remove-field btn btn-danger mt-2">Remove</button>
                       </div>
                     `;
@@ -274,7 +274,7 @@
            $('#category_id').on('change',function(){
                 let id=$(this).val();
                 $.ajax({
-                    url:`product/sub-category/`+id,
+                    url:`sub-category/`+id,
                     type:'GET',
                     success:function(response){
                         // console.log(response);
@@ -294,7 +294,7 @@
             let id=$(this).val();
 
             $.ajax({
-                url:`product/child-category/`+id,
+                url:`child-category/`+id,
                 type:'GET',
                 success:function(response){
                     // console.log(response);
