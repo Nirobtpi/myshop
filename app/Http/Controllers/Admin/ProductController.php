@@ -40,30 +40,25 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        // return $request->color;
-        // $data1= json_decode($data);
-        // foreach($data1 as $d){
-        //     return $d;
-        // }
 
-    //    $request->validate([
-    //     'name'=>['required','max:10'],
-    //     'code'=>['required','unique:product,code'],
-    //     'category_id'=>['required'],
-    //     'subcategory_id'=>['required'],
-    //     'brand_id'=>['required'],
-    //     'unit'=>['required'],
-    //     'selling_price'=>['required'],
-    //     'warehouse_id'=>['required'],
-    //     'color'=>['required'],
-    //     'size'=>['required'],
-    //     'description'=>['required'],
-    //    ],[
-    //     'code.required'=>'Category Code Is Required!',
-    //     'category_id.required'=>'Category Name Is Required!',
-    //     'brand_id.required'=>'Brand Name Is Required!',
-    //     'warehouse_id.required'=>'Warehouse Name Is Required!',
-    //    ]);
+       $request->validate([
+        'name'=>['required','max:10'],
+        'code'=>['required','unique:products,code'],
+        'category_id'=>['required'],
+        'subcategory_id'=>['required'],
+        'brand_id'=>['required'],
+        'unit'=>['required'],
+        'selling_price'=>['required'],
+        'warehouse_id'=>['required'],
+        'color'=>['required'],
+        'size'=>['required'],
+        'description'=>['required'],
+       ],[
+        'code.required'=>'Category Code Is Required!',
+        'category_id.required'=>'Category Name Is Required!',
+        'brand_id.required'=>'Brand Name Is Required!',
+        'warehouse_id.required'=>'Warehouse Name Is Required!',
+       ]);
 
        if($request->thumbnail != ''){
             $request->validate([
@@ -77,28 +72,23 @@ class ProductController extends Controller
             $image->resize(500,500);
             $image->save(public_path('uploads/product/thumbnail/').$tName);
        }
-    //    $imagePaths = [];
-    //    if($request->images != ''){
-    //         foreach($request->images as $image){
-    //             $sImage=$image->extension();
-    //             $sName=uniqid().'gallery'.'.'.$sImage;
-    //             $manager2 = new ImageManager(new Driver());
-    //             $image2 =$manager2->read($image);
-    //         $path= $image2->save(public_path('uploads/product/thumbnail/').$sName);
-    //             $imagePaths[]=$path;
-    //         }
-    //         return $path;
-    //    }
-
-        
-    // explane code 
-        // $tags=json_decode($request->tags);
-        // $tagValues = [];
-        // foreach($tags as $tag){
-        //    $tagValues[]=$tag->value;
-        // };
-        // $tag=implode(',',$tagValues);
-        $tag = implode(',', array_map(fn($tag) => $tag->value, json_decode($request->tags)));
+       
+       if(!empty($request->images)){
+        $imagePaths = [];
+            foreach($request->images as $image){
+                $sImage=$image->extension();
+                $sName=uniqid().'gallery'.'.'.$sImage;
+                $manager2 = new ImageManager(new Driver());
+                $image2 =$manager2->read($image);
+             $image2->save(public_path('uploads/product/thumbnail/').$sName);
+             array_push($imagePaths,$sName);
+              
+            }
+            //  return $imagePaths=$sName;
+          
+       }
+  
+        $tags= $request->tags;
 
         Product::create([
             'name'=>$request->name,
@@ -116,14 +106,21 @@ class ProductController extends Controller
             'stock_quentity'=>$request->stock_quentity,
             'color'=>$request->color,
             'size'=>$request->size,
-            'tags'=>$tag,
+            'tags'=>$tags,
             'description'=>$request->description,
             'thumbnail'=>$tName,
-            // 'images'=>$request->images,
+            'images'=>json_encode($imagePaths),
             'feature'=>$request->feature,
             'today_deal'=>$request->today_deal,
             'status'=>$request->status,
        ]);
+
+       return back()->with('success','Product Add Successfully');
         
+    }
+
+    public function index(){
+        $pr=Product::all();
+        return view('backend.product.index',compact('pr'));
     }
 }

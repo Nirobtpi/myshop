@@ -105,11 +105,11 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     Route::post('/update/{id}',[PickupController::class,'update'])->name('pickuppoint.update');
     Route::get('/distroy/{id}',[PickupController::class,'distroy'])->name('pickuppoint.distroy');
   });
-
   // product route 
 
   Route::group(['prefix'=>'product'],function(){
     route::get('/',[ProductController::class,'create'])->name('product.create');
+    route::get('index',[ProductController::class,'index'])->name('product.index');
     route::post('store',[ProductController::class,'store'])->name('product.store');
   });
 

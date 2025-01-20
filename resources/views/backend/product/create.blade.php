@@ -257,7 +257,7 @@
 
                 let newField = `
                       <div class="image-upload-field mb-4">
-                         <input class="form-control" type="file" />
+                         <input class="form-control" name="images[]" type="file" />
                         <button type="button" class="remove-field btn btn-danger mt-2">Remove</button>
                       </div>
                     `;
@@ -338,5 +338,18 @@
 
         });
 
+
+
     </script>
+    @if (session('sucees'))
+        <script>
+            Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "{{ session('success') }}",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+        </script>
+    @endif
 @endpush
