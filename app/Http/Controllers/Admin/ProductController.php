@@ -75,20 +75,19 @@ class ProductController extends Controller
        
        if(!empty($request->images)){
         $imagePaths = [];
+            $request->validate([
+                'images'=>['mimes:png,jpg,gif,svg','max:3048']
+            ]);
             foreach($request->images as $image){
                 $sImage=$image->extension();
                 $sName=uniqid().'gallery'.'.'.$sImage;
                 $manager2 = new ImageManager(new Driver());
                 $image2 =$manager2->read($image);
-             $image2->save(public_path('uploads/product/thumbnail/').$sName);
-             array_push($imagePaths,$sName);
+                $image2->save(public_path('uploads/product/thumbnail/').$sName);
+                array_push($imagePaths,$sName);
               
             }
-            //  return $imagePaths=$sName;
-          
        }
-  
-        $tags= $request->tags;
 
         Product::create([
             'name'=>$request->name,
@@ -106,7 +105,7 @@ class ProductController extends Controller
             'stock_quentity'=>$request->stock_quentity,
             'color'=>$request->color,
             'size'=>$request->size,
-            'tags'=>$tags,
+            'tags'=>$request->tags,
             'description'=>$request->description,
             'thumbnail'=>$tName,
             'images'=>json_encode($imagePaths),
@@ -120,7 +119,7 @@ class ProductController extends Controller
     }
 
     public function index(){
-        $pr=Product::all();
-        return view('backend.product.index',compact('pr'));
+        $products=Product::with('categories','subCategories','childCategories','brands','wareHouses')->paginate(20);
+        return view('backend.product.index',compact('products'));
     }
 }

@@ -289,13 +289,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item"> <a href="{{ route('product.create') }}"
-                                        class="nav-link {{ Route::is('category.index') ? 'active' : '' }}"> <i
+                                        class="nav-link {{ Route::is('product.create') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>New Product</p>
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a href="{{ route('subcategory.index') }}"
-                                        class="nav-link {{ Route::is('subcategory.index') ? 'active' : '' }}"> <i
+                                <li class="nav-item"> <a href="{{ route('product.index') }}"
+                                        class="nav-link {{ Route::is('product.index') ? 'active' : '' }}"> <i
                                             class="nav-icon bi bi-circle"></i>
                                         <p>Manage Product</p>
                                     </a>
