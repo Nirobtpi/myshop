@@ -111,11 +111,16 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     route::get('create',[ProductController::class,'create'])->name('product.create');
     route::get('/',[ProductController::class,'index'])->name('product.index');
     route::post('store',[ProductController::class,'store'])->name('product.store');
+    route::get('edit/{id}',[ProductController::class,'edit'])->name('product.edit');
+    route::get('distroy/{id}',[ProductController::class,'distroy'])->name('product.distroy');
+    route::post('update/{id}',[ProductController::class,'update'])->name('product.upodate');
+    route::get('sub-category/{id}',[SubCategoryController::class,'subCategory'])->name('ajax.subcategory');
+    route::get('child-category/{id}',[ProductController::class,'childCategory'])->name('ajax.childcategory');
   });
 
  // Global route here 
-    route::get('sub-category/{id}',[ProductController::class,'subCategory'])->name('ajax.subcategory');
-    route::get('child-category/{id}',[ProductController::class,'childCategory'])->name('ajax.childcategory');
+
+  
 
   // Setting route 
   Route::prefix('setting')->group(function(){

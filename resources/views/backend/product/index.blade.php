@@ -52,7 +52,7 @@
                             <th>Discount Price</th>
                             <th>Stock Quantity</th>
                             <th>Warehouse Name</th>
-                            {{-- <th>Action</th> --}}
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,13 +71,13 @@
                                 <td>{{ $product->stock_quentity }}</td>
                                 <td>{{ $product->wareHouses->warehouse_name }}</td>
 
-                                {{-- <td>
+                                <td>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-success
                                     edit"><i class="fa-regular fa-pen-to-square"></i>
                                     </a>
                                     <a data-link="{{ route('product.distroy', $product->id) }}"
                                         class="btn btn-sm btn-danger delete"><i class="fa-solid fa-trash-can"></i></a>
-                                </td> --}}
+                                </td>
                             </tr>
                         @empty
                             <tr>

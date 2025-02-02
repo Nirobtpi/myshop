@@ -12,6 +12,7 @@ use App\Models\SubCategory;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -25,12 +26,6 @@ class ProductController extends Controller
         $subcategories=SubCategory::all();
         $products=Product::all();
         return view('backend.product.create',compact('categories','warehouses','pickup_points','brands','subcategories'));
-    }
-    // get sub category with category_id 
-    public function subCategory($id){
-        $sub_category=SubCategory::where('category_id',$id)->get();
-
-        return response()->json($sub_category);
     }
 
     // get child category where sub cate id = 
@@ -119,6 +114,12 @@ class ProductController extends Controller
     }
 
     public function index(){
+        
+        // return DB::table('products')
+        // ->leftjoin('users','products.user_id','=','users.id')
+        // ->leftJoin('categories','categories.id','=','products.category_id')
+        // ->select('users.name as user_name','products.*','categories.category_name')
+        // ->get();
         $products=Product::with('categories','subCategories','childCategories','brands','wareHouses')->paginate(20);
         return view('backend.product.index',compact('products'));
     }
