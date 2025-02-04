@@ -41,6 +41,7 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">SL No</th>
+                            <th>Thumbnail</th>
                             <th>Pickup Point Name</th>
                             <th>Code</th>
                             <th>Category</th>
@@ -52,6 +53,7 @@
                             <th>Discount Price</th>
                             <th>Stock Quantity</th>
                             <th>Warehouse Name</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,6 +61,7 @@
                         @forelse ($products as $key => $product)
                             <tr class="align-middle">
                                 <td>{{ $products->firstitem() + $key }}</td>
+                                <td><img src="{{ asset('uploads/product/thumbnail') . '/' . $product->thumbnail }}" alt="Product" style="width: 50px"></td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->code }}</td>
                                 <td>{{ $product->categories->category_name }}</td>
@@ -70,6 +73,13 @@
                                 <td>{{ $product->discount_price }}</td>
                                 <td>{{ $product->stock_quentity }}</td>
                                 <td>{{ $product->wareHouses->warehouse_name }}</td>
+                                <td>
+                                @if ($product->status == 1)
+                                    <a href="{{ route('product.status', $product->id) }}" class="btn btn-sm btn-success">Deactive</a>
+                                @else
+                                    <a href="{{ route('product.status', $product->id) }}" class="btn btn-sm btn-danger">Active</a>
+                                @endif 
+                            </td>
 
                                 <td>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-success
@@ -138,6 +148,15 @@
             Swal.fire({
                 title: "Deleted!",
                 text: "{{ session('distroy') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+    @if (session('status'))
+        <script>
+            Swal.fire({
+                title: "Success!",
+                text: "{{ session('status') }}",
                 icon: "success"
             });
         </script>

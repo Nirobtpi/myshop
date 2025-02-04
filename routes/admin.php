@@ -116,6 +116,9 @@ Route::middleware('isadmin')->prefix('admin')->group(function(){
     route::post('update/{id}',[ProductController::class,'update'])->name('product.upodate');
     route::get('sub-category/{id}',[SubCategoryController::class,'subCategory'])->name('ajax.subcategory');
     route::get('child-category/{id}',[ProductController::class,'childCategory'])->name('ajax.childcategory');
+
+    // update product status 
+    route::get('update-status/{id}',[ProductController::class,'updateStatus'])->name('product.status');
   });
 
  // Global route here 

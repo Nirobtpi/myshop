@@ -123,4 +123,19 @@ class ProductController extends Controller
         $products=Product::with('categories','subCategories','childCategories','brands','wareHouses')->paginate(20);
         return view('backend.product.index',compact('products'));
     }
+
+    // update status 
+    public function updateStatus($id){
+        $product=Product::findOrFail($id);
+        if($product->status==1){
+            $product->update([
+                'status'=>0
+            ]);
+        }else{
+            $product->update([
+                'status'=>1
+            ]); 
+        }
+        return back()->with('status','Status Updated Successfully!');
+    }
 }
